@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+      <title>Pitchumani.com</title>
+      
+
+      <meta property="og:url"           content="https://www.spritle.com/your-page.html" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="Your Website Title" />
+      <meta property="og:description"   content="Your description" />
+      <meta property="og:image"         content="https://www.spritle.com/path/image.jpg" />
+
+      <%= csrf_meta_tags %>
+      <%= csp_meta_tag %>
+
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-sweetalert/1.0.1/sweetalert.min.css">
+
+      <link rel="icon" type="image/x-icon" href="images/favicon.svg">
+      <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700|Open+Sans:300,400,600,700|Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+      <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    </head>
+
+  <body>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <% if notice %>
+      <p class="alert alert-success"><%= notice %></p>
+    <% end %>
+    <% if alert %>
+      <p class="alert alert-danger"><%= alert %></p>
+    <% end %>
+
+    <header id="header">
+      <div class="header">
+        <div class="ui container">
+          <div class="ui secondary  menu">
+            <div class="logo text-center">
+              <a href="#.">
+                <img src="images/favicon.svg" alt="logo" />
+                <p class="_h1">Pitchumani.com</p>
+              </a>
+            </div>
+            <div class="right item">
+              <a class="item">Home</a>
+              <a class="item">Faq</a>
+              <a class="item">Atricles</a>
+              <a class="item">Contact</a>
+
+              <% if user_signed_in? %>
+                <a type="button" class="active item" data-toggle="modal" data-target="#edituserModal">Account</a>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'active item'  %>
+              <% else %>
+                <a class="active item"data-toggle="modal" data-target="#newuserModal">Sign Up</a>
+                <a class="active item"data-toggle="modal" data-target="#loginModal">Login</a>
+              <% end %> 
+            </div>
+          </div>
+        </div>
+      </div> 
+    </header>
+  
+    <!-- memeModal -->
+    <div id="memeModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add Meme</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div class = "well">
+              <%= form_for @meme, :url => {:action => "create_meme"}, :method => "post" do |f| %>
+                <%= f.label :image %>
+                <%= f.file_field :image %>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <%= f.submit "Save", class: "btn btn-primary reload" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- edituserModal -->
+    <div id="edituserModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Modal Header</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <p>Some text in the modal.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- newuserModal -->
+    <div id="newuserModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Sign up</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <%= form_for(resource, as: resource_name, local: true, url: registration_path(resource_name), :remote => true) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+
+              <div class="field">
+                <%= f.label :mobile_number %><br />
+                <%= f.number_field :mobile_number, autofocus: true, autocomplete: "mobile_number", :class => 'form-control' %>
+              </div>
+
+              <div class="field space-top">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %><br />
+                <%= f.password_field :password, autocomplete: "new-password", :class => 'form-control' %>
+              </div>
+
+              <div class="field space-top">
+                <%= f.label :password_confirmation %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", :class => 'form-control' %>
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit "Sign up", :class => 'form-control btn btn-success col-md-2' %>
+            <%= link_to "Facebook", user_facebook_omniauth_authorize_path, :class => 'form-control btn btn-primary col-md-2 ml-20'%>
+            <%= link_to " Google", '/auth/google_oauth2/callback', :class => 'form-control btn btn-primary col-md-2 ml-20' %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <!-- loginModal -->
+    <div id="loginModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Log in</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+          <div class="modal-body">
+            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="field">
+                <%= f.label :mobile_number %><br />
+                <%= f.number_field :mobile_number, autofocus: true, autocomplete: "mobile_number", :class => 'form-control' %>
+              </div>
+
+              <div class="field space-top">
+                <%= f.label :password %><br />
+                <%= f.password_field :password, autocomplete: "current-password", :class => 'form-control' %>
+              </div>
+
+              <% if devise_mapping.rememberable? %>
+                <div class="field space-top">
+                  <%= f.check_box :remember_me %>
+                  <%= f.label :remember_me %>
+                </div>
+              <% end %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <%= f.submit "Log in", :class => 'form-control btn btn-success col-md-2 space-left' %>
+          </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <%= yield %>
+    <!-- Footer -->
+    <div class="content-sec">
+      <div class="ui container">
+        <div class="ui grid text-center">
+          <div class="six wide column">
+            <div class="ui list">
+                <li>Lorem Ipsum is simply</li>
+                <li>Lorem Ipsum is simply</li>
+                <li>Lorem Ipsum is simply</li>
+                <li>Lorem Ipsum is simply</li>
+            </div>
+          </div>
+          <div class="ten wide column">
+            <div class="ui list">
+              <h3>Lorem Ipsum is simply</h3>
+              <ul class="">
+                  <li>Lorem Ipsum</li>
+                  <li>Lorem Ipsum</li>
+                  <li>Lorem Ipsum</li>
+                  <li>Lorem Ipsum</li>
+                  <li>Lorem Ipsum</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui footer">
+      <div class="ui centered grid">
+        <div class="five wide column">
+          <div class="logo text-center">
+            <a href="#.">
+                <img src="images/favicon.svg" alt="logo">
+                <p class="_h1">Pitchumani.com</p>
+            </a>
+          </div>
+        </div>
+        <div class="six wide column">
+          <div class="ui inverted section divider"></div>
+        </div>
+          <div class="five wide column text-center">
+            <div class="ui horizontal list">
+              <a href="#." class="item">
+                <i class="google plus g icon"></i>
+              </a>
+              <a href="#." class="item">
+                <i class="facebook f icon"></i>
+              </a>
+              <a href="#." class="item">
+                <i class="twitter icon"></i>
+              </a>
+            </div>
+          </div>
+          <div class="six wide column">
+            <p>© 2020 Spritle, All Rights Reserved</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

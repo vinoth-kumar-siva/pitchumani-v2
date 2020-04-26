@@ -1,0 +1,273 @@
+<main id="main" role="main">
+
+<div class="banner">
+  <div class="ui container">
+    <div class="ui stackable grid">
+      <div class="eight wide column">
+        <div class="bner-content">
+          <h2>Make hime come back!</h2>
+          <ul class="lists">
+              <li>He saved your life.</li>
+              <li>He saved your marriage life.</li>
+              <li>He saved your office life.</li>
+              <li>He saved your friends and families</li>
+          </ul>
+          <p>We need him again to help us live happily with a smile in face.<br />
+              Show your patron by voting for him to come back to main stream
+              media again.
+          </p>
+          <button class="ui default button">
+            <i class="share alternate icon"></i>
+            Share
+          </button>
+        </div>
+      </div>
+      <div class="four wide text-center column">
+        <div class="bner-img">
+          <span>
+            <img src="images/banner-img.png" alt="banner" />
+          </span>
+        </div>
+      </div>
+      <div class="four wide column">
+        <div class="bner-status">
+          <div class="vote-status">
+            <% if current_user %>
+              <button class="ui primary button vote-now" data-userid="<%= current_user.id%>">
+                <i class="hand point up icon"></i>
+                Vote Now 
+              </button>
+            <% else %>
+              <button class="ui primary button non-auth-btn">
+                <i class="hand point up icon"></i>
+                Vote Now
+              </button>
+            <% end %>
+            <div class="ui statistics">
+              <div class="statistic">
+                <div class="value" style="font-size: 12px !important;">
+                  1.5K
+                </div>
+                <div class="label">
+                  Views
+                </div>
+              </div>
+              <div class="statistic">
+                <div class="value" style="font-size: 12px !important;">
+                <%= @support %>
+                </div>
+                <div class="label">
+                  Support
+                </div>
+              </div>
+              <div class="statistic">
+                <div class="value" style="font-size: 12px !important;">
+                  3
+                </div>
+                <div class="label">
+                  Share
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="spread-status">
+            <a class="ui button" href="https://www.facebook.com/sharer/sharer.php?u=spritle.com" target="_blank">
+              <i class="facebook icon"></i>
+              Spread
+            </a>
+            <div class="ui statistics">
+              <div class="statistic">
+                <div class="value" style="font-size: 12px !important;">
+                  3
+                </div>
+                <div class="label">
+                  Share
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="comments">
+            <div class="headr">
+              <h3>Comments</h3>
+            </div>
+            <div class="ui card">
+              <div class="content">
+
+                <div id="refresh_comment">
+                  <% @comments.each do |comment| %>
+                    <div class="comments-card">
+                      <div class="name-profile">
+                        <span>AL</span>
+                        <i class="comment icon"></i>
+                      </div>
+                      <div class="profile-status">
+                        <div class="name-time">
+                          <h3>@<%= comment.try(:user).try(:user_name) %></h3>
+                          <span>2 minutes ago</span>
+                        </div>
+                        <div class="descrptn">
+                          <p><%= comment.text %></p>
+                        </div>
+                        <div class="content likes-status">
+                          <span class="right floated likes">
+                          <i class="angle down icon"></i>
+                          </span>
+                          <div id="<%= comment.id%>" class="<%= current_user ? 'like-btn' : '' %>" data-commentid="<%= comment.id%>">
+                            <i class="heart outline like icon"></i>
+                          </div>
+                          <span class="count"><%= comment.like_count%></span>
+                        </div>
+                      </div>
+                    </div>
+                  <% end %>
+                </div> 
+              </div>
+            </div>
+            <div class="extra content">
+              <div class="ui large transparent left icon input">
+                <i class="smile outline icon"></i>
+                <input type="text" id="message" placeholder="Write a message…"></input>
+              </div>
+              <span class="record">
+                <% if current_user %>
+                  <button type="button" class="mini ui orange button post-now generate" data-userid="<%= current_user.id%>">Post</button>
+                <% else %>
+                  <button class="mini ui orange button non-auth-btn generate">Post</button>
+                <% end %>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="latest-meme">
+  <div class="ui container">
+    <div class="heading">
+      <h3>Latest<b>Meme</b></h3>
+    </div>
+    <div class="meme-slider">
+      <div class="ui four column grid">
+        <% @memes.each do |meme| %>
+          <div class="column">
+            <div class="ui fluid card">
+              <div class="image">
+                <img class="meme-img" src="<%= meme.try(:image).try(:url) %>" alt="meme-img">
+              </div>
+              <div class="meme-status">
+                <div class="content likes-sectn">
+                  <span class="right floated likes">
+                  <i class="heart outline like icon"></i>
+                  17 likes
+                  </span>
+                  <i class="comment icon"></i>
+                  3 comments
+                </div>
+                <div class="extra content">
+                  <div class="ui large transparent left icon input">
+                    <i class="heart outline icon"></i>
+                    <input type="text" placeholder="Add comment…">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="column">
+          <div class="ui fluid card">
+            <div class="image">
+              <img class="meme-img" src="images/latest_meme_8.png" alt="meme-img">
+            </div>
+            <div class="meme-status">
+              <% if current_user %>
+                <div class="content likes-sectn upload" data-toggle="modal" data-target="#memeModal">
+                  <i class="upload icon"></i>
+                  Add New memes
+                </div>
+              <% else %>
+                <div class="content likes-sectn upload non-auth-btn">
+                  <i class="upload icon"></i>
+                  Add New memes
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="latest-meme videos">
+  <div class="ui container">
+    <div class="heading">
+      <h3>Latest<b>Videos</b></h3>
+    </div>
+    <div class="ui four column grid video-slider">
+      <div class="column">
+        <div class="ui fluid card">
+            <iframe width="252" height="210" src="https://www.youtube.com/embed/ejSMCWKk768" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="meme-status">
+            <div class="content likes-sectn">
+              <span class="right floated likes">
+              <i class="heart outline like icon"></i>
+              1K likes
+              </span>
+              <i class="eye icon"></i>
+              9K Views
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui fluid card">
+        <iframe width="252" height="210" src="https://www.youtube.com/embed/QEuv_Fc2vl0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="meme-status">
+            <div class="content likes-sectn">
+              <span class="right floated likes">
+              <i class="heart outline like icon"></i>
+              300 likes
+              </span>
+              <i class="eye icon"></i>
+              4.4K Views
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui fluid card">
+        <iframe width="252" height="210" src="https://www.youtube.com/embed/mdwvmddox4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="meme-status">
+            <div class="content likes-sectn">
+              <span class="right floated likes">
+              <i class="heart outline like icon"></i>
+              170 likes
+              </span>
+              <i class="eye icon"></i>
+              3.5K Views
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui fluid card">
+        <iframe width="252" height="210" src="https://www.youtube.com/embed/arGJ0q8mXBs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          <div class="meme-status">
+            <div class="content likes-sectn">
+              <span class="right floated likes">
+              <i class="heart outline like icon"></i>
+              245 likes
+              </span>
+              <i class="eye icon"></i>
+              7.5K Views
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
