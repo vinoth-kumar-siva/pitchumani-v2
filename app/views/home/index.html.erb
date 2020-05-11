@@ -1,271 +1,275 @@
 <main id="main" role="main">
 
-<div class="banner">
-  <div class="ui container">
-    <div class="ui stackable grid">
-      <div class="eight wide column">
-        <div class="bner-content">
-          <h2>Make hime come back!</h2>
-          <ul class="lists">
-              <li>He saved your life.</li>
-              <li>He saved your marriage life.</li>
-              <li>He saved your office life.</li>
-              <li>He saved your friends and families</li>
-          </ul>
-          <p>We need him again to help us live happily with a smile in face.<br />
-              Show your patron by voting for him to come back to main stream
-              media again.
-          </p>
-          <button class="ui default button">
-            <i class="share alternate icon"></i>
-            Share
-          </button>
-        </div>
-      </div>
-      <div class="four wide text-center column">
-        <div class="bner-img">
-          <span>
-            <img src="images/banner-img.png" alt="banner" />
-          </span>
-        </div>
-      </div>
-      <div class="four wide column">
-        <div class="bner-status">
-          <div class="vote-status">
-            <% if current_user %>
-              <button class="ui primary button vote-now" data-userid="<%= current_user.id%>">
-                <i class="hand point up icon"></i>
-                Vote Now 
-              </button>
-            <% else %>
-              <button class="ui primary button non-auth-btn">
-                <i class="hand point up icon"></i>
-                Vote Now
-              </button>
-            <% end %>
-            <div class="ui statistics">
-              <div class="statistic">
-                <div class="value" style="font-size: 12px !important;">
-                  1.5K
-                </div>
-                <div class="label">
-                  Views
-                </div>
-              </div>
-              <div class="statistic">
-                <div class="value" style="font-size: 12px !important;">
-                <%= @support %>
-                </div>
-                <div class="label">
-                  Support
-                </div>
-              </div>
-              <div class="statistic">
-                <div class="value" style="font-size: 12px !important;">
-                  3
-                </div>
-                <div class="label">
-                  Share
-                </div>
-              </div>
-            </div>
+<div class="intro-section custom-owl-carousel" id="home-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+      <div class="row align-items-center" style="padding-top: 150px; padding-bottom: 80px;">
+      <div class="col-lg-5 mr-auto" data-aos="fade-up">
+        <div class="owl-carousel slide-one-item-alt-text">
+          <div class="slide-text">
+            <h1>Make him come back!</h1>
+            <p class="mb-5">We need him again to help us live happily with a smile in face.
+              Show your patron by voting for him to come back to main stream media again.</p>
+            <p>
+              <button class="btn btn-outline-light btn-danger py-3 px-5 vote-now">Vote Now</button>
+              <a href="#work-section" class="smoothscroll btn btn-outline-light btn-danger py-3 px-5" style="margin-left: 15px;">View Meme</a>
+            </p>
           </div>
-          <div class="spread-status">
-            <a class="ui button" href="https://www.facebook.com/sharer/sharer.php?u=spritle.com" target="_blank">
-              <i class="facebook icon"></i>
-              Spread
-            </a>
-            <div class="ui statistics">
-              <div class="statistic">
-                <div class="value" style="font-size: 12px !important;">
-                  3
-                </div>
-                <div class="label">
-                  Share
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="comments">
-            <div class="headr">
-              <h3>Comments</h3>
-            </div>
-            <div class="ui card">
-              <div class="content">
+        </div>
 
-                <div id="refresh_comment">
-                  <% @comments.each do |comment| %>
-                    <div class="comments-card">
-                      <div class="name-profile">
-                        <span>AL</span>
-                        <i class="comment icon"></i>
-                      </div>
-                      <div class="profile-status">
-                        <div class="name-time">
-                          <h3>@<%= comment.try(:user).try(:user_name) %></h3>
-                          <span>2 minutes ago</span>
-                        </div>
-                        <div class="descrptn">
-                          <p><%= comment.text %></p>
-                        </div>
-                        <div class="content likes-status">
-                          <span class="right floated likes">
-                          <i class="angle down icon"></i>
-                          </span>
-                          <div id="<%= comment.id%>" class="<%= current_user ? 'like-btn' : '' %>" data-commentid="<%= comment.id%>">
-                            <i class="heart outline like icon"></i>
-                          </div>
-                          <span class="count"><%= comment.like_count%></span>
-                        </div>
-                      </div>
-                    </div>
-                  <% end %>
-                </div> 
-              </div>
+      </div>
+      <div class="col-lg-6 ml-auto"  data-aos="fade-up" data-aos-delay="100">
+                    
+        <div class="owl-carousel slide-one-item-alt">
+          <img src="images/2.jpg" alt="Image" class="img-fluid">
+          <img src="images/3.jpg" alt="Image" class="img-fluid">
+          <img src="images/4.jpg" alt="Image" class="img-fluid">
+          <img src="images/1.jpg" alt="Image" class="img-fluid">
+          <img src="images/5.jpg" alt="Image" class="img-fluid">
+          <img src="images/11.jpg" alt="Image" class="img-fluid">
+          <img src="images/12.jpg" alt="Image" class="img-fluid">
+        </div>
+
+        <div class="owl-custom-direction">
+          <a href="#" class="custom-prev"><span class="icon-keyboard_arrow_left"></span></a>
+          <a href="#" class="custom-next"><span class="icon-keyboard_arrow_right"></span></a>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-lg-10">
+      <div class="row section-counter">
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="">
+          <div class="counter d-flex align-items-start mb-5">
+            <div class="icon-wrap"><span class="flaticon-reload text-white"></span></div>
+
+            <div class="counter-text">
+              <strong class="number" data-number="360">0</strong>
+              <span>Views</span>
             </div>
-            <div class="extra content">
-              <div class="ui large transparent left icon input">
-                <i class="smile outline icon"></i>
-                <input type="text" id="message" placeholder="Write a message…"></input>
-              </div>
-              <span class="record">
-                <% if current_user %>
-                  <button type="button" class="mini ui orange button post-now generate" data-userid="<%= current_user.id%>">Post</button>
-                <% else %>
-                  <button class="mini ui orange button non-auth-btn generate">Post</button>
-                <% end %>
-              </span>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="counter d-flex align-items-start">
+            <div class="icon-wrap"><span class="flaticon-download text-white"></span></div>
+            <div class="counter-text">
+              <strong class="number" id="support" data-number="<%= @support %>">0</strong>
+              <span>Support</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="counter d-flex align-items-start mb-5">
+            <div class="icon-wrap"><span class="flaticon-monitor text-white"></span></div>
+            <div class="counter-text">
+              <strong class="number" data-number="120">0</strong>
+              <span>Shares</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="counter d-flex align-items-start">
+            <div class="icon-wrap"><span class="flaticon-chat text-white"></span></div>
+            <div class="counter-text">
+              <strong class="number" data-number="<%= @comments_count %>">0</strong>
+              <span>Comments</span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+      
+    </div>
+
+    <div class="social-icon">
+      <ul>
+        <li>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=www.spritle.com" target="_blank">
+            <img src="images/Facebook.png" alt="icon" />
+          </a>
+        </li>
+        <li>
+          <a href="https://www.instagram.com/?url=https://www.spritle.com" target="_blank">
+            <img src="images/Instagram.png" alt="icon" />
+          </a>
+        </li>
+        <li>
+          <a href="http://twitter.com/share" target="_blank">
+            <img src="images/Twitter.png" alt="icon" />
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+  </div>
 </div>
 
-<div class="latest-meme">
-  <div class="ui container">
-    <div class="heading">
-      <h3>Latest<b>Meme</b></h3>
-    </div>
-    <div class="meme-slider">
-      <div class="ui four column grid">
-        <% @memes.each do |meme| %>
-          <div class="column">
-            <div class="ui fluid card">
-              <div class="image">
-                <img class="meme-img" src="<%= meme.try(:image).try(:url) %>" alt="meme-img">
-              </div>
-              <div class="meme-status">
-                <div class="content likes-sectn">
-                  <span class="right floated likes">
-                  <i class="heart outline like icon"></i>
-                  17 likes
-                  </span>
-                  <i class="comment icon"></i>
-                  3 comments
-                </div>
-                <div class="extra content">
-                  <div class="ui large transparent left icon input">
-                    <i class="heart outline icon"></i>
-                    <input type="text" placeholder="Add comment…">
-                  </div>
-                </div>
-              </div>
+<div class="site-section section-1">
+  <div class="site-section testimonial-wrap custom-owl-carousel" id="testimonials-section">
+    <div class="container">
+      <div class="row text-center justify-content-center mb-5"  data-aos="fade-up">
+        <div class="col-lg-6 mb-5 text-center">
+          <h2 class="section-title w-100 mx-auto">What people think about Vadivelu</h2>
+          <p>He saved your life. He saved your marriage life. He saved your office life. He saved your friends and families.</p>
+        </div>
+      </div>
+      <div class="row align-items-center"  data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-5 mr-auto">
+
+        <div class="owl-carousel slide-one-item-alt-text" id="real_time_comments">
+          <% @comments.each do |comment| %>
+            <div class="slide-text">
+              <blockquote>
+                <p><span>&ldquo;</span><%= comment.text %><span>&rdquo;</span></p>
+                <p class="author">&mdash;  <%= comment.name %></p>
+              </blockquote>
             </div>
+          <% end %>
+        </div>
+
+        </div>
+        <div class="col-lg-6 ml-auto"  data-aos="fade-up" data-aos-delay="200">
+                      
+          <div class="owl-carousel slide-one-item-alt">
+            <img src="images/6.jpg" alt="Image" class="img-fluid">
+            <img src="images/7.jpg" alt="Image" class="img-fluid">
+            <img src="images/8.jpg" alt="Image" class="img-fluid">
+            <img src="images/9.jpg" alt="Image" class="img-fluid">
           </div>
-        <% end %>
-        <div class="column">
-          <div class="ui fluid card">
-            <div class="image">
-              <img class="meme-img" src="images/latest_meme_8.png" alt="meme-img">
-            </div>
-            <div class="meme-status">
-              <% if current_user %>
-                <div class="content likes-sectn upload" data-toggle="modal" data-target="#memeModal">
-                  <i class="upload icon"></i>
-                  Add New memes
-                </div>
-              <% else %>
-                <div class="content likes-sectn upload non-auth-btn">
-                  <i class="upload icon"></i>
-                  Add New memes
-                </div>
-              <% end %>
-            </div>
+
+          <div class="owl-custom-direction">
+            <a href="#" class="custom-prev"><span class="icon-keyboard_arrow_left"></span></a>
+            <a href="#" class="custom-next"><span class="icon-keyboard_arrow_right"></span></a>
           </div>
+
         </div>
       </div>
     </div>
   </div>
+
 </div>
 
-<div class="latest-meme videos">
-  <div class="ui container">
-    <div class="heading">
-      <h3>Latest<b>Videos</b></h3>
+<div class="site-section section-2" id="work-section" data-aos="fade">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-5">
+        <button type="button" class="btn btn-danger pull-right" data-toggle="modal" data-target="#memeModal">Add Meme</button>
+        <h2 class="section-title">Meme's Section</h2>
+        
+        <p>Vadivelu's dialogues served as an inspiration for memes and trolls in social media.Many meme creators use Vadivelu's dialogues for all ongoing situations in the world to express irony.His dialogues have been part of daily conversation and also inspired the titles for various Tamil films</p>
+      </div>
     </div>
-    <div class="ui four column grid video-slider">
-      <div class="column">
-        <div class="ui fluid card">
-            <iframe width="252" height="210" src="https://www.youtube.com/embed/ejSMCWKk768" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="meme-status">
-            <div class="content likes-sectn">
-              <span class="right floated likes">
-              <i class="heart outline like icon"></i>
-              1K likes
-              </span>
-              <i class="eye icon"></i>
-              9K Views
+
+  </div>
+
+  <div class="owl-carousel nonloop-block-13">
+
+    <% @memes.each do |memes| %>
+      <a class="work-thumb" href="<%= memes.try(:image).try(:url) %>" data-fancybox="gallery">
+        <div class="work-text">
+          <h3><button class="btn btn-outline-light btn-danger py-3 px-5">Share</button></h3>
+          <span class="category"></span>
+        </div>
+        <img src="<%= memes.try(:image).try(:url) %>" alt="Image" class="img-fluid">
+      </a>
+    <% end %> 
+
+  </div>
+
+</div>
+
+<div class="site-section bg-light" id="services-section" data-aos="fade">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-5">
+        <h2 class="section-title">Best Of Vadivelu</h2>
+        <p>Vadivelu's roles involve heavy use of slapstick and puns, which has led him to be typecast. His comedy sequences typically end with him getting soundly thrashed and a closing one-liner from him bemoaning his situation or antagonists. His popularity could be ascribed to the general audience being able to identify with him thanks to his rustic looks, accent and body language.</p>
+      </div>
+    </div>
+
+  </div>
+
+    
+  <div class="owl-carousel nonloop-block-14">
+    
+    <div class="service">
+      <div>
+        <iframe src="https://www.youtube.com/embed/VOJnO098Ueo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+
+    <div class="service">
+      <div>
+        <iframe src="https://www.youtube.com/embed/VOJnO098Ueo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="service">
+      <div>
+        <iframe src="https://www.youtube.com/embed/VOJnO098Ueo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="service">
+      <div>
+        <iframe src="https://www.youtube.com/embed/VOJnO098Ueo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="service">
+      <div>
+        <iframe src="https://www.youtube.com/embed/VOJnO098Ueo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="service">
+      <div>
+        <iframe src="https://www.youtube.com/embed/VOJnO098Ueo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div class="site-section" id="contact-section"  data-aos="fade">
+  <div class="container">
+
+    <div class="row align-items-center">
+      <div class="col-md-5 order-1 order-md-2 mb-5 mb-md-0">
+        <img src="images/10.jpg" alt="Image" class="img-fluid">
+      </div>
+      <div class="col-md-6 mr-auto order-2 order-md-1">
+        
+        <h2 class="section-title mb-3">Share your thought's</h2>
+        <p class="mb-5">Intha kota thandi neeyum vara kudathu naanum vara matan pechu pechathan irukanum</p>
+      
+        <!-- <form method="post"> -->
+          <div class="form-group row">
+            <div class="col-md-12">
+              <input type="text" class="form-control" style="margin-bottom: 15px;" id="name"  placeholder="Your Name">
+            </div>
+            <div class="col-md-12">
+              <textarea class="form-control" id="message" cols="30" rows="10" placeholder="Write your message here."></textarea>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui fluid card">
-        <iframe width="252" height="210" src="https://www.youtube.com/embed/QEuv_Fc2vl0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="meme-status">
-            <div class="content likes-sectn">
-              <span class="right floated likes">
-              <i class="heart outline like icon"></i>
-              300 likes
-              </span>
-              <i class="eye icon"></i>
-              4.4K Views
+
+          <div class="form-group row">
+            <div class="col-md-6">
+              
+              <input type="submit" class="post-now btn btn-primary py-3 px-5 btn-block" value="Share">
             </div>
           </div>
-        </div>
+
+        <!-- </form> -->
       </div>
-      <div class="column">
-        <div class="ui fluid card">
-        <iframe width="252" height="210" src="https://www.youtube.com/embed/mdwvmddox4U" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="meme-status">
-            <div class="content likes-sectn">
-              <span class="right floated likes">
-              <i class="heart outline like icon"></i>
-              170 likes
-              </span>
-              <i class="eye icon"></i>
-              3.5K Views
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="column">
-        <div class="ui fluid card">
-        <iframe width="252" height="210" src="https://www.youtube.com/embed/arGJ0q8mXBs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          <div class="meme-status">
-            <div class="content likes-sectn">
-              <span class="right floated likes">
-              <i class="heart outline like icon"></i>
-              245 likes
-              </span>
-              <i class="eye icon"></i>
-              7.5K Views
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
   </div>
 </div>

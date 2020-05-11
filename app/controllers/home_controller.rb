@@ -2,28 +2,25 @@ class HomeController < ApplicationController
 	skip_before_action :authenticate_user!
 	skip_before_action :verify_authenticity_token
   def index
-    @support = Vote.where("user_id IS NOT NULL").count
-    @comments = Comment.last(3)
+    @support = Vote.count
+    @comments_count = Comment.count
+    @comments = Comment.last(20).reverse
     @memes = Meme.last(7)
     @meme = Meme.new
   end
 
   def vote_now
-    p '12333'
-  	@user = User.find(params[:user_id])
-  	@vote = @user.vote
-    if @vote
-      p ' avaible'
-  		render :json => { message: "You have already voted!", alert: "error", status: 200}
-  	else
-  		@user.create_vote
-  		@support = Vote.where("user_id IS NOT NULL").count
-  		render :json => { message: "Your vote has been registered successfully!", alert: "success", support: @support, status: 200}
-  	end
+    @vote = Vote.create
+    if @vote.save
+      @support = Vote.count
+      render :json => { message: "Thankyou your honour! Thankyou!", alert: "success", support: @support, status: 200}
+    else
+  		render :json => { message: @vote.errors['message'], alert: "error", status: 200}
+    end
   end
 
   def create_meme
-    if @meme = Meme.create(name: params[:meme][:name], image: params[:meme][:image], user_id: current_user.id)
+    if @meme = Meme.create(name: params[:meme][:name], image: params[:meme][:image])
       redirect_to root_path 
       # render :json => { message: "Your Meme has been created successfully!", alert: "success", support: @comments, status: 200}
     end
@@ -37,9 +34,8 @@ class HomeController < ApplicationController
   end
 
   def create_post
-    @user = User.find(params[:user_id])
-    Comment.create(user_id:params[:user_id], text: params[:message])
-    @comments = Comment.last(5)
-    render :json => { message: "Your comment has been registered successfully!", alert: "success", support: @comments, status: 200}
+    Comment.create(name:params[:name], text: params[:message])
+    @comments = Comment.last(20).reverse
+    render :json => { message: "Thankyou your honour! Thankyou!", alert: "success", support: @comments, status: 200}
 	end
 end

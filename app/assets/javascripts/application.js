@@ -21,24 +21,31 @@
 
 $(document).ready(function() {
   
-	$('.non-auth-btn').click(function(){
-		toastr.error("Authenticaion Required! Please login!")
-		// swal("Your vote has been registered successfully!", "", "success")
-	});
-
 	$('.vote-now').click(function(){
+    console.log("Yes! checking");
 		$.ajax({
       url: "/home/vote_now",
       method: "POST",
       data: {user_id: $('.vote-now').attr('data-userid')},
       success: function(data) {
-          if (data["alert"] == "success"){
-              toastr.success(data.message);  
-          }
-          else {
-              toastr.error(data.message);
-          }
-          $('.support_count').html(data.support);
+        if (data["alert"] == "success") {
+            $('.vote-now').prop('disabled', true);
+            toastr.success(data.message);
+            $('#support').html(data.support);
+            console.log("data.support -->",data.support);
+            setTimeout( function() { 
+              swal("Let the world know about him!", "Kapathanum nu vanta kaludhai ah kapathi vittutu poo")
+              .then((value) => {
+                $('html, body').animate({
+                  scrollTop: $("#contact-section").offset().top
+                }, 2000);
+              });
+            }  , 6000 );
+              
+        }
+        else {
+            toastr.error(data.message);
+        }
       }
     })
   });
@@ -66,24 +73,30 @@ $(document).ready(function() {
   
   $('.post-now').on( "click",function() {
     //console.log( $('#message').val())
-    $.ajax({
-      url: "/home/create_post",
-      method: "POST",
-      data: {user_id: $('.vote-now').attr('data-userid'), message: $('#message').val()},
-      success: function(data) {
-        $('#message').val('');
-        $("#refresh_comment").empty();
-
-        toastr.success(data.message);
-        
-        var data_array = data.support;
-
-        data_array.forEach(function (arrayItem) {
-          location.reload();
-          //console.log("array --->", arrayItem);
-          //$('#refresh_comment').append('<ul class="media-list"><li><div class="media-body"><strong class="text-success" style="padding: 10px;">@'+ arrayItem.user_id +'&nbsp;&nbsp;'+ arrayItem.text +'</strong><span class="text-muted pull-right"><small class="text-muted"><button class="btn btn-xs"><span class="fa fa-thumbs-up like-btn" data-commentid="'+arrayItem.id+'"><b style="margin: 5px;">'+arrayItem.like_count+'</b></span></button></small></span></div></li></ul>');
-        });
-      }
-    })
+    if($('#message').val() == '') {
+      toastr.error('Please enter your name');
+    } else if(($('#name').val() == '')) {
+      toastr.error('Please enter your message');
+    } else {
+      $.ajax({
+        url: "/home/create_post",
+        method: "POST",
+        data: {message: $('#message').val(), name: $('#name').val()},
+        success: function(data) {
+          toastr.success(data.message);
+          console.log(data.support)
+  
+          var data_array = data.support;
+          data_array.forEach(function (arrayItem) {
+            $('#real_time_comments').append('<div class="slide-text"><blockquote><p><span>&ldquo;</span>'+arrayItem.text+'<span>&rdquo;</span></p><p class="author">&mdash;  '+arrayItem.name+'</p></blockquote></div>')
+          });
+          // if after submit message and name will be empty, add this code
+          // $('#message').val('')
+          // $('#name').val('')
+          
+        }
+      })
+    }
+    
   });
 })
